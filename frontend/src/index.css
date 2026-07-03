@@ -1,0 +1,109 @@
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #fff;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  font: 18px/145% var(--sans);
+  color: var(--text);
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  max-width: 1126px;
+  margin: 0 auto;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.container {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  margin: 20px auto;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #dfe6e9;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #0984e3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+button:hover { background-color: #74b9ff; }
+
+
+.team-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.slot {
+  width: 100px;
+  height: 150px;
+  border: 2px dashed #dfe6e9;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.slot.selected {
+  border-color: #0984e3;
+  background-color: #e1f5fe;
+}
+
+#searchResult {
+  height: 300px; /* 固定高度 */
+  overflow-y: scroll; /* 增加滚动条 */
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.pokemon-item {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.pokemon-item.selected {
+  background-color: #ffeaa7; /* 选中后的高亮颜色 */
+  border: 2px solid #fdcb6e;
+}
