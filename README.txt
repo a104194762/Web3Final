@@ -28,7 +28,7 @@ MySQL Server
 
 Installation
 
-Clone the repository: git clone [your-repository-link]
+Clone the repository: git clone https://github.com/a104194762/Web3Final
 Database Setup: Create a database named pokemon_db in MySQL and import the provided database.sql file.
 Backend Setup: Navigate to the backend directory and run: 
 ./mvnw spring-boot:run
