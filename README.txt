@@ -12,6 +12,7 @@ Advanced filtering by dual elemental types .
 Interactive team builder with drag-and-drop-like selection, highlighting, and team switching.  
 Duplicate Pokemon validation to ensure team uniqueness.  
 Responsive design for seamless use across different devices.
+Role-based Access Control: Secured admin dashboard to monitor system logs, accessible only to users with ADMIN privileges.
 
 Technology Stack
 
@@ -28,7 +29,7 @@ MySQL Server
 
 Installation
 
-Clone the repository: git clone [your-repository-link]
+Clone the repository: git clone https://github.com/a104194762/Web3Final
 Database Setup: Create a database named pokemon_db in MySQL and import the provided database.sql file.
 Backend Setup: Navigate to the backend directory and run: 
 ./mvnw spring-boot:run
@@ -40,7 +41,8 @@ API Documentation
 
 GET /api/pokemons: Retrieve all Pokemon or filter by type.
 GET /api/pokemons/search?query={name}: Search for Pokemon by name and sync with local database.  
-POST /api/teams/save: Save a user's customized team.  
+POST /api/teams/save: Save a user's customized team.
+GET /api/logs: Retrieve system activity logs. This endpoint is restricted and requires ADMIN role authentication.
 
 Project Structure
 /backend: Contains the Kotlin Spring Boot source code, controllers, services, and repositories.  

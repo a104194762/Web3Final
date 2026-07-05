@@ -19,6 +19,5 @@ class Pokemon(
     @Column(name = "type2")
     var type2: String? = null
 ) {
-    // Hibernate 需要无参构造函数
     constructor() : this(0, "", "", "")
 }

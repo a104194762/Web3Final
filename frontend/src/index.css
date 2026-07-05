@@ -90,8 +90,8 @@ button:hover { background-color: #74b9ff; }
 }
 
 #searchResult {
-  height: 300px; /* 固定高度 */
-  overflow-y: scroll; /* 增加滚动条 */
+  height: 300px;
+  overflow-y: scroll;
   border: 1px solid #ccc;
   padding: 10px;
 }
@@ -104,6 +104,6 @@ button:hover { background-color: #74b9ff; }
 }
 
 .pokemon-item.selected {
-  background-color: #ffeaa7; /* 选中后的高亮颜色 */
+  background-color: #ffeaa7;
   border: 2px solid #fdcb6e;
 }

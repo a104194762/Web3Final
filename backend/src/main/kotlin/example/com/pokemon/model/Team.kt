@@ -18,6 +18,5 @@ class Team(
     @OneToMany(mappedBy = "team", cascade = [CascadeType.ALL], orphanRemoval = true)
     var members: MutableList<TeamMember> = mutableListOf()
 ) {
-    // 确保显式调用构造函数，Hibernate 需要无参构造函数
     constructor() : this(0, null, 0, "", mutableListOf())
 }

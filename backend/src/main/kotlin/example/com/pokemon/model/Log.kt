@@ -11,5 +11,5 @@ class Log(
 
     var username: String = "",
     var action: String = "",
-    var timestamp: java.time.LocalDateTime = java.time.LocalDateTime.now()
+    var timestamp: LocalDateTime = LocalDateTime.now()
 )

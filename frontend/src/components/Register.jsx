@@ -9,10 +9,9 @@ function Register() {
 
     const handleRegister = async () => {
         try {
-            // 对应 UserController 的 /api/users/register 接口[cite: 11]
             await axios.post('/api/users/register', { username, password });
             alert("Registration successful!");
-            navigate('/'); // 成功后跳转回登录页
+            navigate('/');
         } catch (err) {
             alert("Registration failed: " + (err.response?.data || "Unknown error"));
         }

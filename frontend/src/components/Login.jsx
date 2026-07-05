@@ -2,6 +2,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+axios.defaults.withCredentials = true;
+
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -9,10 +11,10 @@ function Login() {
 
     const handleLogin = async () => {
         try {
-            // 对应 AuthController 的 /api/auth/login 接口[cite: 7, 8]
             await axios.post('/api/auth/login', { username, password });
-            navigate('/dashboard'); // 登录成功跳转至组队页 (App.jsx)
+            navigate('/dashboard');
         } catch (err) {
+            console.error(err);
             alert("Login failed! Please check your credentials.");
         }
     };

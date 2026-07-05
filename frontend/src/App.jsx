@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './index.css';
+import { useNavigate } from 'react-router-dom';
 
 axios.defaults.withCredentials = true;
 
@@ -18,17 +19,22 @@ function App() {
     const [query, setQuery] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [filterType, setFilterType] = useState("");
-    const [selectedResultId, setSelectedResultId] = useState(null); // 选中宝可梦的 ID
+    const [selectedResultId, setSelectedResultId] = useState(null);
+    const [userRole, setUserRole] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchTeams();
+        axios.get('/api/auth/me')
+            .then(res => setUserRole(res.data.role))
+            .catch(() => setUserRole(null));
     }, []);
 
     useEffect(() => {
         const url = filterType ? `/api/pokemons?type=${filterType}` : '/api/pokemons';
         axios.get(url).then(res => {
             setSearchResults(res.data);
-            setSelectedResultId(null); // 切换筛选时清空选中
+            setSelectedResultId(null);
         });
     }, [filterType]);
 
@@ -61,24 +67,14 @@ function App() {
     };
 
     const addPokemon = (pokemon) => {
-        // 1. 检查是否选择了槽位
         if (selectedSlotIndex === -1) return alert("Please select a slot first!");
-
-        // 2. 检查队伍中是否已经存在该宝可梦 (通过 ID 判断)
-        const isAlreadyInTeam = allTeams[currentTeamIndex].some(
-            member => member && member.id === pokemon.id
-        );
-
-        if (isAlreadyInTeam) {
-            return alert("This Pokémon is already in your team!");
-        }
-
-        // 3. 执行添加
+        const isAlreadyInTeam = allTeams[currentTeamIndex].some(member => member && member.id === pokemon.id);
+        if (isAlreadyInTeam) return alert("This Pokémon is already in your team!");
         const nextTeams = [...allTeams];
         nextTeams[currentTeamIndex][selectedSlotIndex] = pokemon;
         setAllTeams(nextTeams);
         setSelectedSlotIndex(-1);
-        setSelectedResultId(null); // 添加成功后取消搜索列表的高亮
+        setSelectedResultId(null);
     };
 
     const removePokemon = (index) => {
@@ -117,6 +113,14 @@ function App() {
 
     return (
         <div className="App">
+            {/* 管理员专属界面按钮 */}
+            {userRole === 'ROLE_ADMIN' && (
+                <div style={{ margin: '20px', padding: '10px', border: '1px solid red' }}>
+                    <h3>Admin Controls</h3>
+                    <button onClick={() => navigate('/logs')}>View System Logs</button>
+                </div>
+            )}
+
             <h2>Current Team: {currentTeamIndex + 1}</h2>
             <input
                 value={teamNames[currentTeamIndex]}

@@ -20,7 +20,7 @@ class PokemonController(
     @GetMapping
     fun getPokemons(@RequestParam(required = false) type: String?): List<Pokemon> {
         return if (!type.isNullOrEmpty()) {
-            pokemonRepository.findByTypeOrType2(type, type) // 查询 Type1 或 Type2 中包含该属性的
+            pokemonRepository.findByTypeOrType2(type, type)
         } else {
             pokemonRepository.findAll()
         }

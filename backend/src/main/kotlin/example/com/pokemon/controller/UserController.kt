@@ -15,21 +15,24 @@ class UserController(
     private val userRepository: UserRepository,
     private val passwordEncoder: PasswordEncoder,
     private val authenticationManager: AuthenticationManager
-) {
+){
 
     @PostMapping("/register")
     fun register(@RequestBody user: User): String {
-        user.role = "USER"
-        val rawPassword = user.password ?: ""
-        user.password = passwordEncoder.encode(rawPassword) ?: ""
+        val raw = user.password ?: ""
+        val encoded = passwordEncoder.encode(raw) ?: ""
+        user.password = passwordEncoder.encode(user.password).toString()
         userRepository.save(user)
         return "User registered successfully"
     }
 
     @PostMapping("/login")
     fun login(@RequestBody request: Map<String, String>): ResponseEntity<String> {
+        val username = request["username"] ?: ""
+        val password = request["password"] ?: ""
+
         val auth = authenticationManager.authenticate(
-            UsernamePasswordAuthenticationToken(request["username"], request["password"])
+            UsernamePasswordAuthenticationToken(username, password)
         )
         SecurityContextHolder.getContext().authentication = auth
         return ResponseEntity.ok("Login successful")
